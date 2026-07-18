@@ -3,38 +3,66 @@ import { createRoot } from 'react-dom/client';
 import DotField from './components/DotField';
 import '../styles.css';
 
-const services = {
-  web: ['Web Development', 'High-performance websites, SaaS platforms, portals, and internal tools with careful frontend architecture and deployment-ready implementation.', ['React and modern frontend systems', 'API integration and backend coordination', 'SEO, accessibility, analytics, and performance']],
-  mobile: ['Mobile Apps', 'Mobile products designed around repeated use, fast interaction, clear navigation, and stable releases.', ['iOS and Android product flows', 'Offline-friendly UX patterns', 'App-store-ready delivery support']],
-  ai: ['AI Solutions', 'Practical AI products: automation, generative features, proof-of-concepts, agentic workflows, ML layers, and internal copilots.', ['AI consulting and opportunity mapping', 'MVPs and proof-of-concepts', 'Agents, automation, ML, and data workflows']],
-  design: ['UI/UX Design', 'Interface systems that make complex software legible, responsive, and pleasant to use without burying the user under decoration.', ['Product strategy and UX flows', 'Design systems and component libraries', 'Prototypes, motion states, and handoff specs']],
-  qa: ['QA Automation', 'Testing systems that turn launch confidence into a repeatable workflow instead of a last-week panic.', ['Regression test planning', 'Automation coverage for critical flows', 'Release checklists and quality gates']],
-  cloud: ['Cloud & DevOps', 'Cloud foundations, deployment pipelines, observability, and cost-aware scaling for serious products.', ['CI/CD and environment strategy', 'Monitoring, logs, alerts, and uptime', 'Cloud architecture and infrastructure reviews']],
-};
+const services = [
+  ['AI Solutions', 'Custom AI agents, machine learning models, and intelligent automation that transform how your business operates and makes decisions.'],
+  ['Web Development', 'Modern, scalable web applications built with React, Next.js, and cutting-edge technologies that deliver exceptional user experiences.'],
+  ['Mobile Development', 'Native and cross-platform mobile apps for iOS and Android that engage users with smooth, intuitive interactions.'],
+  ['UI/UX Design', 'User-centered design that transforms complex workflows into intuitive, beautiful interfaces your customers will love.'],
+  ['QA & Automation', 'Comprehensive testing strategies and automated quality assurance that catch bugs before your users do.'],
+  ['Cloud & DevOps', 'Scalable cloud infrastructure, CI/CD pipelines, and DevOps practices that keep your applications running smoothly.'],
+];
 
-const articles = {
-  ai: ['Where AI agents actually help a business.', 'The best AI workflows are not magic demos. They are narrow, permissioned, observable systems that reduce a repeated bottleneck.', ['Start with one measurable workflow', 'Keep humans in review for high-risk actions', 'Log decisions so the system can improve']],
-  design: ['Why premium UX is mostly subtraction.', 'A product feels expensive when it removes uncertainty. Fewer choices, clearer hierarchy, stronger defaults, better feedback.', ['Delete ambiguous controls', 'Make state visible', 'Let motion explain change, not decorate it']],
-  cloud: ['Launch architecture for small teams.', 'A small team needs boring infrastructure with sharp observability. The goal is velocity without gambling on production.', ['Automate deploys early', 'Track cost and failures from day one', 'Delay complexity until traffic proves it']],
-};
+const technologies = [
+  ['AI Solutions', ['LangChain', 'LangGraph', 'LlamaIndex', 'CrewAI', 'AutoGen', 'Hugging Face', 'TensorFlow', 'PyTorch']],
+  ['Front End', ['React', 'Next.js', 'Angular', 'Vue.js', 'TypeScript']],
+  ['Back End', ['Node.js', 'NestJS', 'Python', 'Django', 'FastAPI', 'Spring Boot', '.NET']],
+  ['Mobile', ['Flutter', 'React Native', 'Swift', 'Kotlin']],
+  ['QA & Automation', ['Playwright', 'Cypress', 'Selenium', 'Appium', 'JMeter']],
+  ['DevOps & Cloud', ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions']],
+];
 
-const jobs = {
-  frontend: ['Senior Frontend Engineer', 'Build polished, accessible, fast product interfaces with React, design systems, and disciplined motion.', ['Strong CSS and browser fundamentals', 'Taste for interaction detail', 'Comfort owning frontend architecture']],
-  ai: ['AI Automation Engineer', 'Design and implement practical AI workflows that connect models, APIs, business logic, and human review.', ['LLM product experience', 'Workflow and API integration', 'Good judgment around risk and evaluation']],
-  qa: ['QA Automation Specialist', 'Create release confidence through lean automated coverage, careful manual exploration, and clear quality signals.', ['E2E and regression planning', 'Critical-path thinking', 'Strong bug reports and release discipline']],
-};
+const process = [
+  ['STEP 01', 'Discovery & Strategy', 'We analyze your business goals, user needs, and technical requirements to create a roadmap that aligns technology with your vision.'],
+  ['STEP 02', 'Architecture & Planning', 'Our architects design scalable, maintainable systems with clear technical specifications and milestone-based project plans.'],
+  ['STEP 03', 'UI/UX Design', 'We craft intuitive, beautiful interfaces through user research, wireframing, prototyping, and iterative design sprints.'],
+  ['STEP 04', 'Development', 'Agile development with clean, well-documented code. Regular demos and transparent communication keep you in the loop.'],
+  ['STEP 05', 'Quality Assurance', 'Rigorous testing: unit, integration, performance, and security, ensures your product works flawlessly across all scenarios.'],
+  ['STEP 06', 'Deployment & Launch', 'Zero-downtime deployments, infrastructure optimization, and comprehensive monitoring for a smooth, reliable launch.'],
+  ['STEP 07', 'Support & Evolution', 'Post-launch support, performance monitoring, and continuous improvements keep your product ahead of the curve.'],
+];
+
+const testimonials = [
+  ['SC', 'Sarah Chen', 'CTO, FinTech Startup', "Rohan's team built our AI platform in just 8 weeks. They explained everything clearly and kept us in the loop the whole time. The final product was production ready and exactly what we needed. Their engineering skills are top notch."],
+  ['MR', 'Marcus Rodriguez', 'VP of Engineering, E-Commerce Platform', "Rohan's team migrated our entire system to a microservices architecture with zero downtime. They knew exactly what they were doing and handled everything smoothly. The whole process felt organized and stress free."],
+  ['EW', 'Emily Watson', 'Product Director, Healthcare SaaS', "The mobile app they built reduced our patient onboarding time by 60 percent. Ahmad's team understood healthcare compliance well and made sure everything was built to the right standard. It made a real difference for us."],
+  ['DK', 'David Kim', 'Founder & CEO, AI Startup', "From idea to deployed MVP in 6 weeks. Rohan's team didn't just write code. They helped us shape our product strategy and technical architecture from the ground up. Their input was invaluable and made our product much stronger."],
+  ['PS', 'Priya Sharma', 'Head of Digital, Enterprise Corp', 'The Code Amigo team transformed our old system into something modern and scalable. We saw return on investment within the first quarter of deployment. They were professional, communicative, and delivered exactly what they promised.'],
+  ['JM', 'James Mitchell', 'CTO, Logistics Company', "Ahmad's team improved our testing process significantly. They cut our regression testing from 3 days down to just 4 hours. Their systematic approach to quality saved us a lot of time and gave us more confidence in every release."],
+];
+
+const blogs = [
+  ['Engineering', '8 min read', 'Building Scalable Microservices with Node.js and Kubernetes', 'A practical guide to designing, deploying, and managing microservices architecture for high-traffic applications.'],
+  ['AI & Tech', '6 min read', 'The Future of AI-Powered Development Tools', 'How artificial intelligence is transforming the software development lifecycle and what it means for engineering teams.'],
+  ['Cloud', '7 min read', 'Deploying Cloud-Native Applications at Scale', 'Best practices for building resilient, scalable applications in modern cloud environments.'],
+];
+
+const jobs = [
+  ['Senior React Developer', 'Full-time', 'Remote', 'Engineering', '5+ years'],
+  ['Full-Stack Engineer', 'Full-time', 'Remote', 'Engineering', '3+ years'],
+  ['UI/UX Designer', 'Full-time', 'Remote', 'Design', '3+ years'],
+];
 
 function smoothScroll(id) {
   const target = document.querySelector(id);
   if (!target) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const start = window.scrollY;
-  const top = target.getBoundingClientRect().top + start - 104;
+  const top = target.getBoundingClientRect().top + start - 96;
   if (reduce) {
     window.scrollTo(0, top);
     return;
   }
-  const duration = Math.min(1100, Math.max(520, Math.abs(top - start) * 0.46));
+  const duration = Math.min(950, Math.max(420, Math.abs(top - start) * 0.38));
   const started = performance.now();
   const ease = (t) => 1 - Math.pow(1 - t, 4);
   function step(now) {
@@ -46,46 +74,51 @@ function smoothScroll(id) {
 }
 
 function WordReveal({ as: Tag = 'span', children, className = '' }) {
+  const words = String(children).split(/\s+/);
+
   return (
-    <Tag className={className}>
-      {String(children).split(/\s+/).map((word, i) => (
-        <span className="word" style={{ '--i': i }} key={`${word}-${i}`}>{word} </span>
+    <Tag className={className} aria-label={String(children)}>
+      {words.map((word, i) => (
+        <React.Fragment key={`${word}-${i}`}>
+          <span className="word" style={{ '--i': i }} aria-hidden="true">{word}</span>
+          {i < words.length - 1 ? ' ' : ''}
+        </React.Fragment>
       ))}
     </Tag>
   );
 }
 
-function DetailDialog({ detail, onClose }) {
-  if (!detail) return null;
+function SectionTitle({ eyebrow, title, children }) {
   return (
-    <div className="dialog-backdrop" role="presentation" onMouseDown={onClose}>
-      <section className="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title" onMouseDown={(event) => event.stopPropagation()}>
-        <button className="dialog-close" type="button" aria-label="Close dialog" onClick={onClose}>&times;</button>
-        <div className="dialog-body">
-          <p className="signal">Code Amigo</p>
-          <h2 id="detail-title">{detail[0]}</h2>
-          <p>{detail[1]}</p>
-          <ul>{detail[2].map((point) => <li key={point}>{point}</li>)}</ul>
-          <button className="button primary magnetic" type="button" onClick={() => { onClose(); smoothScroll('#contact'); }}>Start this conversation</button>
-        </div>
-      </section>
+    <div className="section-head reveal">
+      <p className="signal">{eyebrow}</p>
+      <WordReveal as="h2">{title}</WordReveal>
+      {children && <p>{children}</p>}
     </div>
   );
 }
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [detail, setDetail] = useState(null);
   const [note, setNote] = useState('');
   const isDark = theme === 'dark';
 
   useEffect(() => {
+    document.documentElement.classList.add('js');
     document.documentElement.dataset.theme = theme;
     localStorage.setItem('theme', theme);
   }, [theme]);
 
   useEffect(() => {
+    const reveal = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((element) => reveal.observe(element));
+
     const onMove = (event) => {
       document.body.style.setProperty('--mx', `${event.clientX}px`);
       document.body.style.setProperty('--my', `${event.clientY}px`);
@@ -94,10 +127,13 @@ function App() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       document.body.style.setProperty('--scroll', max > 0 ? window.scrollY / max : 0);
     };
+
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
     return () => {
+      reveal.disconnect();
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('scroll', onScroll);
     };
@@ -118,14 +154,12 @@ function App() {
     glowColor: '#120F17',
   }), [isDark]);
 
-  const nav = ['services', 'work', 'process', 'journal', 'careers'];
-  const serviceItems = [
-    ['web', 'WEB', 'Web Development', 'Fast, resilient customer-facing platforms.'],
-    ['mobile', 'APP', 'Mobile Apps', 'Native-feeling products for daily use.'],
-    ['ai', 'AI', 'AI Solutions', 'Agents, automation, ML, and AI product layers.'],
-    ['design', 'UX', 'UI/UX Design', 'Systems that make complex flows feel calm.'],
-    ['qa', 'QA', 'QA Automation', 'Confidence loops before launch day.'],
-    ['cloud', 'OPS', 'Cloud & DevOps', 'Infrastructure that scales without drama.'],
+  const nav = [
+    ['home', 'Home'],
+    ['services', 'Services'],
+    ['work', 'Work'],
+    ['blog', 'Blog'],
+    ['careers', 'Careers'],
   ];
 
   return (
@@ -143,78 +177,169 @@ function App() {
           <span>Code Amigo</span>
         </button>
         <nav className="nav-links" aria-label="Primary navigation">
-          {nav.map((id) => <button key={id} type="button" onClick={() => { setMenuOpen(false); smoothScroll(`#${id}`); }}>{id[0].toUpperCase() + id.slice(1)}</button>)}
+          {nav.map(([id, label]) => <button key={id} type="button" onClick={() => { setMenuOpen(false); smoothScroll(`#${id}`); }}>{label}</button>)}
         </nav>
-        <button className="theme-toggle" type="button" aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'} aria-pressed={isDark} onClick={() => setTheme(isDark ? 'light' : 'dark')}>
+        <button className="theme-toggle" type="button" aria-label={isDark ? 'Switch theme' : 'Switch theme'} aria-pressed={isDark} onClick={() => setTheme(isDark ? 'crimson' : 'dark')}>
           <span className="sun" /><span className="moon" />
         </button>
-        <button className="nav-cta magnetic" type="button" onClick={() => smoothScroll('#contact')}>Start a Project</button>
+        <button className="nav-cta magnetic" type="button" onClick={() => smoothScroll('#contact')}>Get a Quote</button>
         <button className="menu-toggle" type="button" aria-label="Open menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
       </header>
 
       <main id="home">
         <section className="hero section-panel">
-          <div className="hero-copy reveal visible">
-            <p className="signal">Custom software, AI systems, product engineering</p>
-            <WordReveal as="h1">Software that feels less built, more composed.</WordReveal>
-            <WordReveal as="p">Code Amigo turns ambitious product ideas into precise digital systems: web platforms, mobile apps, AI workflows, cloud infrastructure, and the product design needed to make them feel inevitable.</WordReveal>
+          <div className="hero-copy reveal">
+            <p className="signal">Premium Software Development Company</p>
+            <WordReveal as="h1">We Build Digital Products That Scale</WordReveal>
+            <WordReveal as="p">We craft software with clean code, thoughtful design, and long-term vision, engineered to grow with your business, not against it.</WordReveal>
             <div className="hero-actions">
-              <button className="button primary magnetic" type="button" onClick={() => smoothScroll('#contact')}>Discuss the build</button>
-              <button className="button ghost" type="button" onClick={() => smoothScroll('#work')}>Explore the studio</button>
+              <button className="button primary magnetic" type="button" onClick={() => smoothScroll('#contact')}>Get Started</button>
+              <button className="button ghost" type="button" onClick={() => smoothScroll('#work')}>View Our Work</button>
             </div>
           </div>
-          <div className="hero-stage reveal visible" aria-label="Animated delivery system">
+          <div className="hero-stage reveal" aria-label="Animated Code Amigo delivery system">
             <div className="flow-visual">
               <div className="flow-line line-one" />
               <div className="flow-line line-two" />
               <div className="flow-card primary-flow">
-                <span>Product Core</span>
-                <strong>Design to Build to Launch</strong>
-                <p>One focused system for turning ideas into shipped software.</p>
+                <span>Code Amigo</span>
+                <strong>Idea to Launch</strong>
+                <p>Strategy, design, engineering, quality, cloud, and support moving as one delivery system.</p>
               </div>
-              <div className="flow-node node-a"><span>UX</span><strong>Mapped</strong></div>
-              <div className="flow-node node-b"><span>AI</span><strong>Scoped</strong></div>
-              <div className="flow-node node-c"><span>QA</span><strong>Armed</strong></div>
-              <div className="flow-node node-d"><span>Ops</span><strong>Live</strong></div>
+              <div className="flow-node node-a"><span>01</span><strong>Discover</strong></div>
+              <div className="flow-node node-b"><span>03</span><strong>Design</strong></div>
+              <div className="flow-node node-c"><span>05</span><strong>QA</strong></div>
+              <div className="flow-node node-d"><span>07</span><strong>Evolve</strong></div>
             </div>
           </div>
         </section>
 
-        <section className="marquee" aria-label="Capabilities"><div>{['Generative AI', 'Cloud & DevOps', 'Mobile Apps', 'UI/UX Systems', 'QA Automation', 'Web Platforms'].map((item) => <span key={item}>{item}</span>)}</div></section>
-
         <section id="services" className="services section-panel">
-          <div className="section-head reveal visible"><p className="signal">What gets shipped</p><WordReveal as="h2">Six disciplines, one delivery system.</WordReveal><p>Each capability is designed as part of one product pipeline, so strategy, interface, engineering, testing, and deployment do not drift apart.</p></div>
-          <div className="service-orbit">{serviceItems.map(([key, code, title, desc]) => <button className="service-node reveal visible" type="button" key={key} onClick={() => setDetail(services[key])}><span>{code}</span><strong>{title}</strong><em>{desc}</em></button>)}</div>
+          <SectionTitle eyebrow="Our Services" title="Solutions We Deliver">End-to-end software engineering services tailored to your business needs</SectionTitle>
+          <div className="service-grid">
+            {services.map(([title, desc], index) => (
+              <article className="service-card reveal" style={{ '--d': index }} key={title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section id="work" className="work section-panel">
-          <div className="work-lockup reveal visible"><p className="signal">Experience architecture</p><WordReveal as="h2">Every project becomes a small operating system.</WordReveal><p>Instead of isolated pages and tickets, the studio maps every build as a connected stack: user journey, interface states, API contracts, release gates, analytics, and cloud posture.</p></div>
-          <div className="product-map reveal visible">{[['Research', 'Signals', 'User intent, market pressure, technical risk.'], ['Design', 'System', 'UX flows, visual language, components.'], ['Build', 'Runtime', 'Frontend, backend, AI, data, cloud.'], ['Operate', 'Release', 'QA, monitoring, deployment, iteration.']].map(([a, b, c]) => <div className="map-column" key={a}><span>{a}</span><strong>{b}</strong><p>{c}</p></div>)}</div>
+        <section id="work" className="tech section-panel">
+          <SectionTitle eyebrow="Tech Stack" title="Technologies We Master">We stay at the forefront of technology to deliver the best solutions for your projects</SectionTitle>
+          <div className="tech-board">
+            {technologies.map(([category, list], index) => (
+              <article className="tech-row reveal" style={{ '--d': index }} key={category}>
+                <h3>{category}</h3>
+                <div>
+                  {list.map((item) => <span className="chip" key={item}>{item}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="process" className="process section-panel">
-          <div className="section-head reveal visible"><p className="signal">The method</p><WordReveal as="h2">A quiet process for loud ambitions.</WordReveal></div>
-          <div className="timeline">{[['Discover', 'Pressure-test the idea.', 'Clarify the business outcome, the user promise, and the risky assumptions before design starts.'], ['Prototype', 'Make the product visible.', 'Turn abstract requirements into clickable flows, interface states, and buildable architecture.'], ['Engineer', 'Ship the durable version.', 'Build the smallest serious system: fast, tested, accessible, responsive, and deployment-ready.'], ['Launch', 'Release with a feedback loop.', 'QA, deploy, monitor, and keep improving from real signals instead of guessing.']].map(([a, b, c]) => <article className="step reveal visible" key={a}><span>{a}</span><h3>{b}</h3><p>{c}</p></article>)}</div>
+          <SectionTitle eyebrow="Our Process" title="From Idea to Launch">A proven development process that ensures quality, transparency, and timely delivery</SectionTitle>
+          <div className="timeline">
+            {process.map(([step, title, desc]) => (
+              <article className="step reveal" key={step}>
+                <span>{step}</span>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section id="journal" className="journal section-panel">
-          <div className="section-head reveal visible"><p className="signal">Journal</p><WordReveal as="h2">Notes from the build floor.</WordReveal></div>
-          <div className="journal-grid">{Object.entries(articles).map(([key, item]) => <button className="journal-card reveal visible" type="button" key={key} onClick={() => setDetail(item)}><span>{key === 'ai' ? 'AI Product Strategy' : key === 'design' ? 'Interface Craft' : 'Cloud Systems'}</span><h3>{item[0]}</h3><p>{item[1]}</p></button>)}</div>
+        <section className="testimonials section-panel">
+          <SectionTitle eyebrow="Our Work" title="What Our Clients Say">Don't just take our word for it, hear from the teams we've partnered with</SectionTitle>
+          <div className="quote-strip">
+            {testimonials.map(([initials, name, role, quote]) => (
+              <article className="quote-card reveal" key={name}>
+                <p>"{quote}"</p>
+                <div><span>{initials}</span><strong>{name}</strong><em>{role}</em></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="blog" className="blog section-panel">
+          <SectionTitle eyebrow="Latest Insights" title="From Our Blog">Thoughts, tutorials, and insights from our engineering team</SectionTitle>
+          <div className="blog-grid">
+            {blogs.map(([category, read, title, desc]) => (
+              <article className="blog-card reveal" key={title}>
+                <div><span>{category}</span><span>{read}</span></div>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+                <a href="https://code-amigo.vercel.app/" target="_blank" rel="noreferrer">Read More</a>
+              </article>
+            ))}
+          </div>
+          <a className="text-link" href="https://code-amigo.vercel.app/" target="_blank" rel="noreferrer">View All Blogs</a>
         </section>
 
         <section id="careers" className="careers section-panel">
-          <div className="career-copy reveal visible"><p className="signal">Careers</p><WordReveal as="h2">Join the builders who care about the finish.</WordReveal><p>Code Amigo hires people who can move from ambiguity to shipped work: designers, engineers, QA specialists, AI builders, and operators.</p></div>
-          <div className="jobs">{Object.entries(jobs).map(([key, item]) => <button className="job reveal visible" type="button" key={key} onClick={() => setDetail(item)}><strong>{item[0]}</strong><span>{key === 'frontend' ? 'React, motion, accessibility' : key === 'ai' ? 'Agents, APIs, workflow design' : 'Release confidence, testing systems'}</span></button>)}</div>
+          <div className="career-copy reveal">
+            <p className="signal">We're Hiring</p>
+            <WordReveal as="h2">Join Our Team</WordReveal>
+            <p>Be part of a team that's building the future of software</p>
+            <p className="fine-print">* Sample job listings for demonstration purposes</p>
+          </div>
+          <div className="jobs">
+            {jobs.map(([title, type, place, team, exp]) => (
+              <article className="job reveal" key={title}>
+                <strong>{title}</strong>
+                <div><span>{type}</span><span>{place}</span><span>{team}</span><span>{exp}</span></div>
+                <a href="https://code-amigo.vercel.app/" target="_blank" rel="noreferrer">View Details</a>
+              </article>
+            ))}
+            <a className="text-link" href="https://code-amigo.vercel.app/" target="_blank" rel="noreferrer">View All Open Positions</a>
+          </div>
         </section>
 
         <section id="contact" className="contact section-panel">
-          <div className="contact-card reveal visible"><p className="signal">Start</p><WordReveal as="h2">Bring the rough idea. Leave with a sharper path.</WordReveal><form onSubmit={(event) => { event.preventDefault(); setNote('Demo message captured locally. The original site has not been touched.'); event.currentTarget.reset(); }}><label><span>Name</span><input name="name" autoComplete="name" required /></label><label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label><label><span>What are you building?</span><textarea name="message" rows="4" required /></label><button className="button primary magnetic" type="submit">Send inquiry</button><p className="form-note" role="status" aria-live="polite">{note}</p></form></div>
-          <div className="contact-meta reveal visible"><p>hello@codeamigo.com</p><p>+92 320 6877855</p><p>Lahore / Remote-first delivery</p></div>
+          <div className="contact-card reveal">
+            <p className="signal">Ready to Build Something Great?</p>
+            <WordReveal as="h2">Let's discuss your project.</WordReveal>
+            <p>Let's discuss your project and discover how Code Amigo can bring your vision to life with cutting-edge technology and expert engineering.</p>
+            <form onSubmit={(event) => { event.preventDefault(); setNote('Demo message captured locally. The original website has not been touched.'); event.currentTarget.reset(); }}>
+              <label><span>Name</span><input name="name" autoComplete="name" required /></label>
+              <label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>
+              <label><span>Project details</span><textarea name="message" rows="4" required /></label>
+              <button className="button primary magnetic" type="submit">Get a Free Consultation</button>
+              <p className="form-note" role="status" aria-live="polite">{note}</p>
+            </form>
+          </div>
+          <aside className="contact-meta reveal">
+            <p>No commitment required</p>
+            <p>Response within 24 hours</p>
+            <p>Free project assessment</p>
+            <hr />
+            <p>+92 320 6877855</p>
+            <p>hello@codeamigo.com</p>
+          </aside>
         </section>
       </main>
 
-      <footer className="footer"><span>Code Amigo</span><span>Standalone redesign demo. Original website untouched.</span></footer>
-      <DetailDialog detail={detail} onClose={() => setDetail(null)} />
+      <footer className="footer">
+        <span>Code Amigo</span>
+        <span>Company</span>
+        <span>Careers</span>
+        <span>Blog</span>
+        <span>Services</span>
+        <span>Web Development</span>
+        <span>Mobile Development</span>
+        <span>UI/UX Design</span>
+        <span>QA & Automation</span>
+        <span>Cloud & DevOps</span>
+        <span>AI Solutions</span>
+        <span>Stay Updated</span>
+        <span>Subscribe to our newsletter for the latest insights.</span>
+        <span>© 2026 Code Amigo. All rights reserved.</span>
+      </footer>
     </>
   );
 }
