@@ -150,7 +150,7 @@ function App() {
     bulgeStrength: 67,
     glowRadius: 160,
     sparkle: false,
-    waveAmplitude: 0,
+    waveAmplitude: 0.75,
     cursorRadius: 500,
     cursorForce: 0.1,
     bulgeOnly: true,
