@@ -169,7 +169,7 @@ function App() {
               <div className="flow-line line-two" />
               <div className="flow-card primary-flow">
                 <span>Product Core</span>
-                <strong>Design -> Build -> Launch</strong>
+                <strong>Design to Build to Launch</strong>
                 <p>One focused system for turning ideas into shipped software.</p>
               </div>
               <div className="flow-node node-a"><span>UX</span><strong>Mapped</strong></div>
