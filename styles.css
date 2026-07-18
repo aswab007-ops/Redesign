@@ -1,18 +1,18 @@
 :root {
-  color-scheme: light;
-  --bg: #f7fbff;
-  --surface: rgba(255, 255, 255, 0.72);
-  --surface-2: rgba(241, 248, 255, 0.88);
-  --ink: #082133;
-  --muted: #506778;
-  --soft: #7b92a2;
-  --primary: #0878bd;
-  --primary-deep: #075f98;
-  --accent: #36a7d8;
-  --hot: #ffcc73;
-  --cream: #fee4ad;
-  --line: rgba(8, 33, 51, 0.12);
-  --glass: rgba(255, 255, 255, 0.58);
+  color-scheme: dark;
+  --bg: #151515;
+  --surface: rgba(36, 36, 36, 0.72);
+  --surface-2: rgba(96, 96, 95, 0.28);
+  --ink: #f4f4f4;
+  --muted: #d0d0d0;
+  --soft: #a3a3a3;
+  --primary: #a40000;
+  --primary-deep: #690000;
+  --accent: #a3a3a3;
+  --hot: #d9d9d9;
+  --cream: #f4f4f4;
+  --line: rgba(244, 244, 244, 0.13);
+  --glass: rgba(28, 28, 28, 0.62);
   --max: 1180px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   font-family: Geist, Manrope, system-ui, sans-serif;
@@ -117,9 +117,9 @@ body::before {
   z-index: -3;
   pointer-events: none;
   background:
-    radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(54, 167, 216, 0.18), transparent 24rem),
-    radial-gradient(circle at 86% 12%, rgba(255, 204, 115, 0.28), transparent 26rem),
-    linear-gradient(180deg, #ffffff, var(--bg) 48%, #eef7ff);
+    radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(164, 0, 0, 0.18), transparent 24rem),
+    radial-gradient(circle at 86% 12%, rgba(163, 163, 163, 0.18), transparent 28rem),
+    linear-gradient(180deg, #151515, #242424 48%, #0f0f0f);
 }
 
 :root[data-theme="dark"] body::before {
@@ -134,9 +134,9 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -2;
-  opacity: 0.45;
+  opacity: 0.22;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 46%, rgba(255, 255, 255, 0.52));
+  background: linear-gradient(180deg, rgba(244, 244, 244, 0.08), transparent 46%, rgba(0, 0, 0, 0.46));
 }
 
 :root[data-theme="dark"] body::after {
@@ -196,7 +196,7 @@ button {
   height: 320px;
   border-radius: 999px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255, 204, 115, 0.24), rgba(54, 167, 216, 0.12) 38%, transparent 70%);
+  background: radial-gradient(circle, rgba(164, 0, 0, 0.18), rgba(163, 163, 163, 0.12) 38%, transparent 70%);
   filter: blur(14px);
   opacity: 0.78;
   transition: left 120ms linear, top 120ms linear;
@@ -217,11 +217,11 @@ button {
   align-items: center;
   gap: 18px;
   padding: 10px;
-  border: 1px solid rgba(8, 33, 51, 0.1);
+  border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.74);
+  background: rgba(21, 21, 21, 0.76);
   backdrop-filter: blur(22px) saturate(1.2);
-  box-shadow: 0 8px 24px rgba(8, 33, 51, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 :root[data-theme="dark"] .nav-shell {
@@ -278,7 +278,7 @@ button {
 .nav-links a.active,
 .nav-links button:hover {
   color: var(--ink);
-  background: rgba(8, 120, 189, 0.08);
+  background: rgba(244, 244, 244, 0.08);
 }
 
 .nav-cta,
@@ -318,7 +318,7 @@ button {
 
 .sun {
   background: var(--hot);
-  box-shadow: 0 0 0 5px rgba(255, 204, 115, 0.2);
+  box-shadow: 0 0 0 5px rgba(244, 244, 244, 0.12);
 }
 
 .moon {
@@ -351,7 +351,7 @@ button {
 .nav-cta {
   padding: 0 18px;
   background: var(--ink);
-  color: #ffffff;
+  color: #151515;
   font-size: 0.9rem;
 }
 
@@ -390,7 +390,7 @@ button {
 
 .button.ghost {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(244, 244, 244, 0.06);
   color: var(--ink);
 }
 
@@ -409,7 +409,7 @@ button {
   height: 44px;
   border: 0;
   border-radius: 14px;
-  background: rgba(8, 120, 189, 0.08);
+  background: rgba(244, 244, 244, 0.08);
 }
 
 .menu-toggle span {
@@ -519,197 +519,142 @@ h3 {
   overflow: clip;
 }
 
-.signal-feed {
-  position: absolute;
-  left: 2%;
-  top: 16%;
-  z-index: 2;
-  width: min(250px, 42vw);
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.68);
-  backdrop-filter: blur(20px);
-  transform: translateZ(80px);
-}
-
-:root[data-theme="dark"] .signal-feed,
-:root[data-theme="dark"] .core-card,
-:root[data-theme="dark"] .float-chip,
-:root[data-theme="dark"] .service-node,
-:root[data-theme="dark"] .map-column,
-:root[data-theme="dark"] .step,
-:root[data-theme="dark"] .journal-card,
-:root[data-theme="dark"] .job,
-:root[data-theme="dark"] .contact-card,
-:root[data-theme="dark"] .contact-meta,
-:root[data-theme="dark"] dialog {
-  background: rgba(24, 26, 45, 0.66);
-}
-
-.signal-feed span {
-  color: var(--accent);
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.signal-feed p {
+.flow-visual {
   position: relative;
-  margin: 10px 0 0;
-  padding-left: 17px;
-  color: var(--muted);
-  font-size: 0.86rem;
-}
-
-.signal-feed p::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.58em;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--accent);
-}
-
-.orbital {
-  position: relative;
-  width: min(94vw, 520px);
-  aspect-ratio: 1;
-  border-radius: 48%;
-  transform: rotateX(58deg) rotateZ(-18deg);
-  border: 1px solid rgba(8, 120, 189, 0.16);
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.62), transparent 56%),
-    conic-gradient(from 140deg, transparent, rgba(8, 120, 189, 0.22), transparent, rgba(255, 204, 115, 0.36), transparent);
-  animation: slowspin 24s linear infinite;
-}
-
-:root[data-theme="dark"] .orbital {
-  border-color: rgba(180, 151, 207, 0.18);
-  background:
-    radial-gradient(circle, rgba(247, 247, 247, 0.08), transparent 56%),
-    conic-gradient(from 140deg, transparent, rgba(168, 85, 247, 0.32), transparent, rgba(239, 71, 104, 0.3), transparent);
-}
-
-@keyframes slowspin {
-  to {
-    transform: rotateX(58deg) rotateZ(342deg);
-  }
-}
-
-.core-card {
-  position: absolute;
-  inset: 21%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  padding: 28px;
+  width: min(100%, 560px);
+  aspect-ratio: 1.18;
+  display: grid;
+  place-items: center;
   border-radius: 18px;
-  border: 1px solid rgba(8, 33, 51, 0.1);
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(18px);
-  transform: rotateZ(18deg) rotateX(-58deg);
-  box-shadow: 0 8px 8px rgba(8, 33, 51, 0.1);
   overflow: hidden;
 }
 
-.core-card p,
-.core-card span {
-  margin: 0;
-  color: var(--muted);
-}
-
-.core-card strong {
-  font-size: clamp(3.7rem, 8vw, 5.4rem);
-  letter-spacing: -0.04em;
-}
-
-.scanline {
+.flow-visual::before {
+  content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(255, 204, 115, 0.32), transparent);
-  animation: scan 3.8s var(--ease) infinite;
-}
-
-@keyframes scan {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(100%);
-  }
-}
-
-.float-chip {
-  position: absolute;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  inset: 12%;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(164, 0, 0, 0.16), transparent 48%),
+    linear-gradient(315deg, rgba(244, 244, 244, 0.14), transparent 48%),
+    var(--glass);
   border: 1px solid var(--line);
-  backdrop-filter: blur(18px);
-  font-weight: 800;
-  transform: rotateZ(18deg) rotateX(-58deg);
-  animation: floaty 4s var(--ease) infinite alternate;
+  backdrop-filter: blur(16px);
+  transform: perspective(900px) rotateX(58deg) rotateZ(-26deg);
 }
 
-.chip-a {
-  left: 4%;
-  top: 22%;
+.flow-line {
+  position: absolute;
+  width: 82%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+  opacity: 0.58;
+  transform-origin: center;
+  animation: beamMove 5.8s var(--ease) infinite alternate;
 }
 
-.chip-b {
-  right: 2%;
-  top: 42%;
-  animation-delay: -1.3s;
+.line-one {
+  transform: rotate(-18deg) translateY(-66px);
 }
 
-.chip-c {
-  left: 40%;
-  bottom: 3%;
+.line-two {
+  transform: rotate(24deg) translateY(72px);
   animation-delay: -2.2s;
 }
 
-@keyframes floaty {
+.flow-card,
+.flow-node {
+  position: absolute;
+  border: 1px solid var(--line);
+  background: rgba(28, 28, 28, 0.68);
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  color: var(--ink);
+  animation: floatCard 6.4s var(--ease) infinite alternate;
+}
+
+:root[data-theme="dark"] .flow-card,
+:root[data-theme="dark"] .flow-node {
+  background: rgba(24, 26, 45, 0.7);
+}
+
+.flow-card {
+  width: min(74%, 360px);
+  padding: 22px;
+  transform: translateY(4px);
+}
+
+.flow-card span,
+.flow-node span {
+  display: block;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.flow-card strong {
+  display: block;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.flow-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.flow-node {
+  min-width: 112px;
+  padding: 13px 14px;
+}
+
+.flow-node strong {
+  font-size: 1rem;
+}
+
+.node-a {
+  left: 4%;
+  top: 14%;
+}
+
+.node-b {
+  right: 8%;
+  top: 20%;
+  animation-delay: -1.8s;
+}
+
+.node-c {
+  left: 10%;
+  bottom: 18%;
+  animation-delay: -3s;
+}
+
+.node-d {
+  right: 5%;
+  bottom: 14%;
+  animation-delay: -4.2s;
+}
+
+@keyframes floatCard {
   to {
-    translate: 0 -18px;
+    translate: 0 -10px;
   }
 }
 
-.route {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 28px var(--accent);
-}
-
-:root[data-theme="dark"] .route {
-  background: #ef4768;
-  box-shadow: 0 0 28px rgba(239, 71, 104, 0.58);
-}
-
-.route-a {
-  left: 20%;
-  top: 18%;
-}
-
-.route-b {
-  right: 14%;
-  top: 58%;
-}
-
-.route-c {
-  left: 42%;
-  bottom: 10%;
+@keyframes beamMove {
+  to {
+    opacity: 0.82;
+    filter: blur(0.5px);
+  }
 }
 
 .marquee {
   overflow: hidden;
   border-block: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.54);
+  background: var(--surface);
 }
 
 .marquee div {
@@ -837,7 +782,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 16px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent),
+    linear-gradient(180deg, rgba(244, 244, 244, 0.08), transparent),
     var(--glass);
   backdrop-filter: blur(20px);
   scroll-snap-align: start;
@@ -866,7 +811,7 @@ h3 {
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  background: radial-gradient(circle at var(--card-x, 50%) var(--card-y, 20%), rgba(54, 167, 216, 0.16), transparent 34%);
+  background: radial-gradient(circle at var(--card-x, 50%) var(--card-y, 20%), rgba(244, 244, 244, 0.12), transparent 34%);
   transition: opacity 220ms var(--ease);
 }
 
@@ -959,7 +904,7 @@ h3 {
   min-height: 168px;
   padding: 18px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.64);
+  background: var(--surface);
   border: 1px solid var(--line);
   backdrop-filter: blur(18px);
   transition: transform 320ms var(--ease), background 320ms var(--ease);
@@ -972,7 +917,7 @@ h3 {
 
 .map-column:hover {
   transform: translateY(-8px) rotateX(2deg);
-  background: rgba(255, 255, 255, 0.84);
+  background: var(--surface-2);
 }
 
 .map-column span,
@@ -1012,8 +957,8 @@ h3 {
   min-height: 230px;
   padding: 22px;
   background:
-    radial-gradient(circle at 20% 0, rgba(255, 204, 115, 0.22), transparent 44%),
-    rgba(255, 255, 255, 0.7);
+    radial-gradient(circle at 20% 0, rgba(164, 0, 0, 0.18), transparent 44%),
+    var(--surface);
 }
 
 .step h3 {
@@ -1032,7 +977,7 @@ h3 {
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.66);
+  background: var(--surface);
   backdrop-filter: blur(18px);
   transition: transform 320ms var(--ease), border-color 320ms var(--ease);
   animation: cardFloat 8s var(--ease) infinite alternate;
@@ -1043,8 +988,8 @@ h3 {
   grid-row: span 2;
   min-height: 434px;
   background:
-    radial-gradient(circle at 12% 18%, rgba(255, 204, 115, 0.24), transparent 36%),
-    rgba(255, 255, 255, 0.66);
+    radial-gradient(circle at 12% 18%, rgba(164, 0, 0, 0.18), transparent 36%),
+    var(--surface);
 }
 
 .journal-card h3 {
@@ -1070,7 +1015,7 @@ h3 {
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.66);
+  background: var(--surface);
   transition: transform 320ms var(--ease), border-color 320ms var(--ease);
   animation: cardFloat 7.5s var(--ease) infinite alternate;
   overflow: hidden;
@@ -1093,8 +1038,8 @@ h3 {
   padding: clamp(24px, 5vw, 54px);
   border-radius: 18px;
   background:
-    radial-gradient(circle at 80% 10%, rgba(255, 204, 115, 0.3), transparent 34%),
-    rgba(255, 255, 255, 0.72);
+    radial-gradient(circle at 80% 10%, rgba(164, 0, 0, 0.2), transparent 34%),
+    var(--surface);
   border: 1px solid var(--line);
   backdrop-filter: blur(20px);
 }
@@ -1117,7 +1062,7 @@ textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.22);
   color: var(--ink);
   padding: 14px 15px;
   outline: none;
@@ -1141,7 +1086,7 @@ textarea:focus {
   padding: 28px;
   border-radius: 18px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.58);
+  background: var(--surface);
 }
 
 .contact-meta p {
@@ -1182,7 +1127,7 @@ dialog {
   width: min(680px, calc(100% - 28px));
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface);
   color: var(--ink);
   backdrop-filter: blur(24px);
   padding: 0;
@@ -1206,7 +1151,7 @@ dialog {
   overflow: auto;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface);
   color: var(--ink);
   backdrop-filter: blur(24px);
 }
@@ -1296,12 +1241,6 @@ dialog::backdrop {
     min-height: 430px;
   }
 
-  .signal-feed {
-    left: auto;
-    right: 0;
-    top: 6%;
-  }
-
   .journal-grid,
   .timeline,
   .product-map {
@@ -1345,20 +1284,34 @@ dialog::backdrop {
     min-height: 340px;
   }
 
-  .signal-feed {
-    display: none;
+  .flow-visual {
+    width: min(92vw, 380px);
+    aspect-ratio: 0.92;
   }
 
-  .orbital {
-    width: min(92vw, 360px);
+  .flow-visual::before {
+    inset: 18% 8%;
   }
 
-  .core-card {
+  .flow-card {
+    width: 78%;
     padding: 18px;
   }
 
-  .float-chip {
-    font-size: 0.82rem;
+  .flow-node {
+    min-width: 88px;
+    padding: 10px 11px;
+    font-size: 0.86rem;
+  }
+
+  .node-a,
+  .node-c {
+    left: 1%;
+  }
+
+  .node-b,
+  .node-d {
+    right: 1%;
   }
 
   .service-node {

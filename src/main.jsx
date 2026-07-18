@@ -113,9 +113,9 @@ function App() {
     cursorRadius: 500,
     cursorForce: 0.1,
     bulgeOnly: true,
-    gradientFrom: isDark ? '#A855F7' : 'rgba(8, 120, 189, 0.48)',
-    gradientTo: isDark ? '#B497CF' : 'rgba(255, 204, 115, 0.46)',
-    glowColor: isDark ? '#120F17' : 'rgba(255, 204, 115, 0.34)',
+    gradientFrom: isDark ? '#A855F7' : '#A40000',
+    gradientTo: isDark ? '#B497CF' : '#A3A3A3',
+    glowColor: '#120F17',
   }), [isDark]);
 
   const nav = ['services', 'work', 'process', 'journal', 'careers'];
@@ -163,9 +163,20 @@ function App() {
               <button className="button ghost" type="button" onClick={() => smoothScroll('#work')}>Explore the studio</button>
             </div>
           </div>
-          <div className="hero-stage reveal visible" aria-label="Animated product composition">
-            <div className="signal-feed"><span>Live Build Feed</span><p>Design system synced</p><p>QA gate armed</p><p>Cloud preview online</p></div>
-            <div className="orbital"><div className="core-card"><div className="scanline" /><p>Launch Readiness</p><strong>92%</strong><span>Architecture, design, QA, deployment</span></div><div className="float-chip chip-a">AI Agents</div><div className="float-chip chip-b">React</div><div className="float-chip chip-c">Cloud</div><div className="route route-a" /><div className="route route-b" /><div className="route route-c" /></div>
+          <div className="hero-stage reveal visible" aria-label="Animated delivery system">
+            <div className="flow-visual">
+              <div className="flow-line line-one" />
+              <div className="flow-line line-two" />
+              <div className="flow-card primary-flow">
+                <span>Product Core</span>
+                <strong>Design -> Build -> Launch</strong>
+                <p>One focused system for turning ideas into shipped software.</p>
+              </div>
+              <div className="flow-node node-a"><span>UX</span><strong>Mapped</strong></div>
+              <div className="flow-node node-b"><span>AI</span><strong>Scoped</strong></div>
+              <div className="flow-node node-c"><span>QA</span><strong>Armed</strong></div>
+              <div className="flow-node node-d"><span>Ops</span><strong>Live</strong></div>
+            </div>
           </div>
         </section>
 
