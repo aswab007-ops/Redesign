@@ -2,23 +2,24 @@
 
 Standalone UI/UX redesign demo for Code Amigo.
 
-This is a static site. It does not modify the original website or require a build step.
+This is a standalone Vite/React redesign. It does not modify the original website.
 
 ## Preview
 
-Open `index.html` directly, or serve the folder:
+Install and run:
 
 ```bash
-python -m http.server 4173
+npm install
+npm run dev
 ```
 
-Then open `http://127.0.0.1:4173/`.
+Then open the Vite local URL.
 
 ## Included
 
 - Light palette from the supplied blue/yellow reference
 - React Bits DotField component source in `src/components/DotField.jsx`
-- React Bits-inspired DotField background, ported to vanilla canvas for this static demo
+- DotField rendered directly from React in `src/main.jsx`
 - Light/dark theme toggle
 - Smooth in-page navigation
 - Responsive layout with no horizontal overflow

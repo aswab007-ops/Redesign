@@ -149,6 +149,15 @@ a {
   text-decoration: none;
 }
 
+.plain-button,
+.nav-links button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 4px;
@@ -256,7 +265,8 @@ button {
   flex: 1;
 }
 
-.nav-links a {
+.nav-links a,
+.nav-links button {
   padding: 10px 12px;
   border-radius: 12px;
   color: var(--muted);
@@ -265,7 +275,8 @@ button {
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a.active,
+.nav-links button:hover {
   color: var(--ink);
   background: rgba(8, 120, 189, 0.08);
 }
@@ -381,10 +392,6 @@ button {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.66);
   color: var(--ink);
-}
-
-:root[data-theme="dark"] .button.ghost {
-  background: rgba(247, 247, 247, 0.06);
 }
 
 :root[data-theme="dark"] .button.ghost {
@@ -1179,6 +1186,33 @@ dialog {
   color: var(--ink);
   backdrop-filter: blur(24px);
   padding: 0;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(8, 33, 51, 0.36);
+  backdrop-filter: blur(8px);
+}
+
+.detail-modal {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: calc(100svh - 36px);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  backdrop-filter: blur(24px);
+}
+
+:root[data-theme="dark"] .detail-modal {
+  background: rgba(24, 26, 45, 0.9);
 }
 
 dialog::backdrop {
