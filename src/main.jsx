@@ -125,7 +125,12 @@ function App() {
     };
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      document.body.style.setProperty('--scroll', max > 0 ? window.scrollY / max : 0);
+      const y = window.scrollY;
+      const last = Number(document.body.dataset.lastScroll || 0);
+      document.body.style.setProperty('--scroll', max > 0 ? y / max : 0);
+      if (y > 120 && y > last + 6) document.body.classList.add('nav-hidden');
+      if (y < last - 4 || y < 48) document.body.classList.remove('nav-hidden');
+      document.body.dataset.lastScroll = String(y);
     };
 
     window.addEventListener('pointermove', onMove, { passive: true });
@@ -338,7 +343,7 @@ function App() {
         <span>AI Solutions</span>
         <span>Stay Updated</span>
         <span>Subscribe to our newsletter for the latest insights.</span>
-        <span>© 2026 Code Amigo. All rights reserved.</span>
+        <span>(c) 2026 Code Amigo. All rights reserved.</span>
       </footer>
     </>
   );
