@@ -1,5 +1,19 @@
 document.documentElement.classList.add("js");
 
+const themeToggle = document.querySelector(".theme-toggle");
+const savedTheme = localStorage.getItem("theme") || "light";
+document.documentElement.dataset.theme = savedTheme;
+themeToggle.setAttribute("aria-pressed", String(savedTheme === "dark"));
+themeToggle.setAttribute("aria-label", savedTheme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = nextTheme;
+  localStorage.setItem("theme", nextTheme);
+  themeToggle.setAttribute("aria-pressed", String(nextTheme === "dark"));
+  themeToggle.setAttribute("aria-label", nextTheme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+});
+
 const services = {
   web: {
     title: "Web Development",
@@ -151,6 +165,11 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 const reveals = document.querySelectorAll(".reveal");
+document.querySelectorAll("h1, h2, .hero-copy > p:not(.signal)").forEach((node) => {
+  const words = node.textContent.trim().split(/\s+/);
+  node.innerHTML = words.map((word, index) => `<span class="word" style="--i:${index}">${word}</span>`).join(" ");
+});
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -279,16 +298,17 @@ setInterval(updateMouseSpeed, 20);
 function drawDotField() {
   frame += 1;
   ctx.clearRect(0, 0, width, height);
+  const dark = document.documentElement.dataset.theme === "dark";
   const gradient = ctx.createLinearGradient(0, 0, width, height);
-  gradient.addColorStop(0, "rgba(8, 120, 189, 0.34)");
-  gradient.addColorStop(0.52, "rgba(54, 167, 216, 0.26)");
-  gradient.addColorStop(1, "rgba(255, 204, 115, 0.34)");
+  gradient.addColorStop(0, dark ? "rgba(168, 85, 247, 0.58)" : "rgba(8, 120, 189, 0.48)");
+  gradient.addColorStop(0.52, dark ? "rgba(180, 151, 207, 0.42)" : "rgba(54, 167, 216, 0.36)");
+  gradient.addColorStop(1, dark ? "rgba(239, 71, 104, 0.38)" : "rgba(255, 204, 115, 0.46)");
   ctx.fillStyle = gradient;
 
   const engagement = Math.min(mouse.speed / 7, 1);
-  const cursorRadius = 440;
+  const cursorRadius = dark ? 500 : 440;
   const cursorRadiusSq = cursorRadius * cursorRadius;
-  const dotRadius = 0.95;
+  const dotRadius = dark ? 1.25 : 1.15;
   const t = frame * 0.018;
 
   ctx.beginPath();
@@ -299,7 +319,7 @@ function drawDotField() {
 
     if (distSq < cursorRadiusSq && engagement > 0.01) {
       const distance = Math.sqrt(distSq);
-      const force = Math.pow(1 - distance / cursorRadius, 2) * 58 * engagement;
+      const force = Math.pow(1 - distance / cursorRadius, 2) * (dark ? 67 : 58) * engagement;
       const angle = Math.atan2(dy, dx);
       dot.sx += (dot.ax - Math.cos(angle) * force - dot.sx) * 0.15;
       dot.sy += (dot.ay - Math.sin(angle) * force - dot.sy) * 0.15;

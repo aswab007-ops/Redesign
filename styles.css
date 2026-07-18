@@ -18,6 +18,23 @@
   font-family: Geist, Manrope, system-ui, sans-serif;
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #181a2d;
+  --surface: rgba(25, 31, 54, 0.72);
+  --surface-2: rgba(19, 63, 107, 0.38);
+  --ink: #f7f7f7;
+  --muted: #c8d1dd;
+  --soft: #8fa2bb;
+  --primary: #ef4768;
+  --primary-deep: #143f6b;
+  --accent: #2d7bc0;
+  --hot: #ef4768;
+  --cream: #f7f7f7;
+  --line: rgba(247, 247, 247, 0.13);
+  --glass: rgba(24, 26, 45, 0.58);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -97,7 +114,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   pointer-events: none;
   background:
     radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(54, 167, 216, 0.18), transparent 24rem),
@@ -105,14 +122,26 @@ body::before {
     linear-gradient(180deg, #ffffff, var(--bg) 48%, #eef7ff);
 }
 
+:root[data-theme="dark"] body::before {
+  background:
+    radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(239, 71, 104, 0.18), transparent 24rem),
+    radial-gradient(circle at 84% 12%, rgba(20, 63, 107, 0.38), transparent 28rem),
+    linear-gradient(180deg, #181a2d, #17213b 48%, #143f6b);
+}
+
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   opacity: 0.45;
   pointer-events: none;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 46%, rgba(255, 255, 255, 0.52));
+}
+
+:root[data-theme="dark"] body::after {
+  opacity: 0.22;
+  background: linear-gradient(180deg, rgba(247, 247, 247, 0.08), transparent 46%, rgba(24, 26, 45, 0.62));
 }
 
 a {
@@ -138,7 +167,7 @@ button {
 .ambient {
   position: fixed;
   inset: 0;
-  z-index: -3;
+  z-index: -1;
   overflow: hidden;
   pointer-events: none;
   contain: strict;
@@ -164,6 +193,10 @@ button {
   transition: left 120ms linear, top 120ms linear;
 }
 
+:root[data-theme="dark"] .dot-glow {
+  background: radial-gradient(circle, rgba(239, 71, 104, 0.18), rgba(168, 85, 247, 0.14) 38%, transparent 70%);
+}
+
 .nav-shell {
   position: fixed;
   left: 50%;
@@ -182,9 +215,16 @@ button {
   box-shadow: 0 8px 24px rgba(8, 33, 51, 0.08);
 }
 
+:root[data-theme="dark"] .nav-shell {
+  background: rgba(24, 26, 45, 0.76);
+  border-color: rgba(247, 247, 247, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
 .brand-mark,
 .nav-cta,
 .button,
+.theme-toggle,
 .menu-toggle {
   -webkit-tap-highlight-color: transparent;
 }
@@ -243,11 +283,70 @@ button {
   transition: transform 260ms var(--ease), filter 260ms var(--ease);
 }
 
+.theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sun,
+.moon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  transition: transform 360ms var(--ease), opacity 220ms var(--ease);
+}
+
+.sun {
+  background: var(--hot);
+  box-shadow: 0 0 0 5px rgba(255, 204, 115, 0.2);
+}
+
+.moon {
+  opacity: 0;
+  transform: translateY(22px) rotate(-30deg);
+  background: #f7f7f7;
+}
+
+.moon::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #181a2d;
+}
+
+:root[data-theme="dark"] .sun {
+  opacity: 0;
+  transform: translateY(-22px) rotate(30deg);
+}
+
+:root[data-theme="dark"] .moon {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
 .nav-cta {
   padding: 0 18px;
   background: var(--ink);
   color: #ffffff;
   font-size: 0.9rem;
+}
+
+:root[data-theme="dark"] .nav-cta {
+  background: #f7f7f7;
+  color: #181a2d;
 }
 
 .button {
@@ -274,10 +373,22 @@ button {
   color: #ffffff;
 }
 
+:root[data-theme="dark"] .button.primary {
+  background: linear-gradient(135deg, #ef4768, #a855f7);
+}
+
 .button.ghost {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.66);
   color: var(--ink);
+}
+
+:root[data-theme="dark"] .button.ghost {
+  background: rgba(247, 247, 247, 0.06);
+}
+
+:root[data-theme="dark"] .button.ghost {
+  background: rgba(247, 247, 247, 0.06);
 }
 
 .magnetic:hover {
@@ -332,6 +443,23 @@ h2,
 h3,
 p {
   text-wrap: pretty;
+}
+
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.65em);
+  filter: blur(8px);
+  animation: wordIn 760ms var(--ease) forwards;
+  animation-delay: calc(var(--i) * 34ms);
+}
+
+@keyframes wordIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 h1,
@@ -398,6 +526,20 @@ h3 {
   transform: translateZ(80px);
 }
 
+:root[data-theme="dark"] .signal-feed,
+:root[data-theme="dark"] .core-card,
+:root[data-theme="dark"] .float-chip,
+:root[data-theme="dark"] .service-node,
+:root[data-theme="dark"] .map-column,
+:root[data-theme="dark"] .step,
+:root[data-theme="dark"] .journal-card,
+:root[data-theme="dark"] .job,
+:root[data-theme="dark"] .contact-card,
+:root[data-theme="dark"] .contact-meta,
+:root[data-theme="dark"] dialog {
+  background: rgba(24, 26, 45, 0.66);
+}
+
 .signal-feed span {
   color: var(--accent);
   font-size: 0.78rem;
@@ -434,6 +576,13 @@ h3 {
     radial-gradient(circle, rgba(255, 255, 255, 0.62), transparent 56%),
     conic-gradient(from 140deg, transparent, rgba(8, 120, 189, 0.22), transparent, rgba(255, 204, 115, 0.36), transparent);
   animation: slowspin 24s linear infinite;
+}
+
+:root[data-theme="dark"] .orbital {
+  border-color: rgba(180, 151, 207, 0.18);
+  background:
+    radial-gradient(circle, rgba(247, 247, 247, 0.08), transparent 56%),
+    conic-gradient(from 140deg, transparent, rgba(168, 85, 247, 0.32), transparent, rgba(239, 71, 104, 0.3), transparent);
 }
 
 @keyframes slowspin {
@@ -528,6 +677,11 @@ h3 {
   border-radius: 999px;
   background: var(--accent);
   box-shadow: 0 0 28px var(--accent);
+}
+
+:root[data-theme="dark"] .route {
+  background: #ef4768;
+  box-shadow: 0 0 28px rgba(239, 71, 104, 0.58);
 }
 
 .route-a {
@@ -649,10 +803,30 @@ h3 {
   cursor: pointer;
 }
 
+.service-node,
+.map-column,
+.step,
+.journal-card,
+.job,
+.contact-card,
+.contact-meta {
+  box-shadow: 0 8px 18px rgba(8, 33, 51, 0.06);
+}
+
+:root[data-theme="dark"] .service-node,
+:root[data-theme="dark"] .map-column,
+:root[data-theme="dark"] .step,
+:root[data-theme="dark"] .journal-card,
+:root[data-theme="dark"] .job,
+:root[data-theme="dark"] .contact-card,
+:root[data-theme="dark"] .contact-meta {
+  box-shadow: none;
+}
+
 .service-node {
   position: relative;
-  min-height: 300px;
-  padding: 22px;
+  min-height: 190px;
+  padding: 18px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background:
@@ -661,7 +835,20 @@ h3 {
   backdrop-filter: blur(20px);
   scroll-snap-align: start;
   transition: transform 320ms var(--ease), background 320ms var(--ease), border-color 320ms var(--ease);
+  animation: cardFloat 7s var(--ease) infinite alternate;
   overflow: hidden;
+}
+
+.service-node:nth-child(2n),
+.journal-card:nth-child(2n),
+.job:nth-child(2n) {
+  animation-delay: -2.4s;
+}
+
+@keyframes cardFloat {
+  to {
+    transform: translateY(-5px);
+  }
 }
 
 .service-node::after,
@@ -679,8 +866,14 @@ h3 {
 .service-node:hover,
 .journal-card:hover,
 .job:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px) rotateX(1deg);
   border-color: rgba(8, 120, 189, 0.34);
+}
+
+:root[data-theme="dark"] .service-node:hover,
+:root[data-theme="dark"] .journal-card:hover,
+:root[data-theme="dark"] .job:hover {
+  border-color: rgba(239, 71, 104, 0.44);
 }
 
 .service-node:hover::after,
@@ -693,7 +886,7 @@ h3 {
   display: block;
   color: var(--accent);
   font-weight: 800;
-  margin-bottom: 120px;
+  margin-bottom: 42px;
 }
 
 .service-node strong,
@@ -745,6 +938,10 @@ h3 {
   animation: thread 18s linear infinite;
 }
 
+:root[data-theme="dark"] .map-thread path {
+  stroke: rgba(239, 71, 104, 0.36);
+}
+
 @keyframes thread {
   to {
     stroke-dashoffset: -220;
@@ -752,8 +949,8 @@ h3 {
 }
 
 .map-column {
-  min-height: 210px;
-  padding: 22px;
+  min-height: 168px;
+  padding: 18px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.64);
   border: 1px solid var(--line);
@@ -782,8 +979,8 @@ h3 {
 
 .map-column strong {
   display: block;
-  margin: 48px 0 12px;
-  font-size: 2rem;
+  margin: 28px 0 10px;
+  font-size: 1.55rem;
   letter-spacing: -0.035em;
 }
 
@@ -805,15 +1002,15 @@ h3 {
 }
 
 .step {
-  min-height: 330px;
-  padding: 28px;
+  min-height: 230px;
+  padding: 22px;
   background:
     radial-gradient(circle at 20% 0, rgba(255, 204, 115, 0.22), transparent 44%),
     rgba(255, 255, 255, 0.7);
 }
 
 .step h3 {
-  margin-top: 86px;
+  margin-top: 48px;
 }
 
 .journal-grid {
@@ -824,26 +1021,27 @@ h3 {
 
 .journal-card {
   position: relative;
-  min-height: 260px;
-  padding: 26px;
+  min-height: 210px;
+  padding: 22px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.66);
   backdrop-filter: blur(18px);
   transition: transform 320ms var(--ease), border-color 320ms var(--ease);
+  animation: cardFloat 8s var(--ease) infinite alternate;
   overflow: hidden;
 }
 
 .journal-card:first-child {
   grid-row: span 2;
-  min-height: 534px;
+  min-height: 434px;
   background:
     radial-gradient(circle at 12% 18%, rgba(255, 204, 115, 0.24), transparent 36%),
     rgba(255, 255, 255, 0.66);
 }
 
 .journal-card h3 {
-  margin-top: 74px;
+  margin-top: 44px;
   max-width: 12ch;
   font-size: clamp(1.7rem, 4vw, 3.4rem);
 }
@@ -862,11 +1060,12 @@ h3 {
 
 .job {
   position: relative;
-  padding: 24px;
+  padding: 20px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.66);
   transition: transform 320ms var(--ease), border-color 320ms var(--ease);
+  animation: cardFloat 7.5s var(--ease) infinite alternate;
   overflow: hidden;
 }
 
@@ -919,7 +1118,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: var(--accent);
+  border-color: var(--primary);
 }
 
 .form-note {
@@ -1026,9 +1225,12 @@ dialog::backdrop {
     display: none;
   }
 
+  .theme-toggle {
+    margin-left: auto;
+  }
+
   .menu-toggle {
     display: block;
-    margin-left: auto;
   }
 
   .nav-shell.open {
@@ -1142,5 +1344,11 @@ dialog::backdrop {
 
   .cursor-lens {
     display: none;
+  }
+
+  .word {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }

@@ -17,7 +17,9 @@ Then open `http://127.0.0.1:4173/`.
 ## Included
 
 - Light palette from the supplied blue/yellow reference
-- React Bits-inspired DotField background, ported to vanilla canvas
+- React Bits DotField component source in `src/components/DotField.jsx`
+- React Bits-inspired DotField background, ported to vanilla canvas for this static demo
+- Light/dark theme toggle
 - Smooth in-page navigation
 - Responsive layout with no horizontal overflow
 - Services, work, process, journal, careers, contact demo
