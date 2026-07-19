@@ -52,6 +52,23 @@ const jobs = [
   ['UI/UX Designer', 'Full-time', 'Remote', 'Design', '3+ years'],
 ];
 
+const globePoints = Array.from({ length: 112 }, (_, index) => {
+  const t = (index + 0.5) / 112;
+  const phi = Math.acos(1 - 2 * t);
+  const theta = index * Math.PI * (3 - Math.sqrt(5));
+  const x = Math.cos(theta) * Math.sin(phi);
+  const y = Math.cos(phi);
+  const z = Math.sin(theta) * Math.sin(phi);
+  return {
+    x: `${x * 150}px`,
+    y: `${y * 150}px`,
+    z: `${z * 150}px`,
+    size: `${1.8 + Math.max(0, z) * 2.6}px`,
+    delay: `${index * -0.045}s`,
+    opacity: 0.35 + Math.max(0, z) * 0.65,
+  };
+});
+
 function smoothScroll(id) {
   const target = document.querySelector(id);
   if (!target) return;
@@ -85,6 +102,37 @@ function moveLiquidLens(event) {
     target.style.setProperty('--ly', `${y}px`);
     target.style.setProperty('--glass-alpha', '1');
   });
+}
+
+function DepthGlobe() {
+  return (
+    <div className="depth-globe" aria-hidden="true">
+      <div className="globe-halo" />
+      <div className="globe-orbit orbit-one" />
+      <div className="globe-orbit orbit-two" />
+      <div className="globe-orbit orbit-three" />
+      <div className="globe-shell">
+        <div className="globe-core" />
+        {globePoints.map((point, index) => (
+          <span
+            className="globe-point"
+            key={index}
+            style={{
+              '--gx': point.x,
+              '--gy': point.y,
+              '--gz': point.z,
+              '--gs': point.size,
+              '--gd': point.delay,
+              '--go': point.opacity,
+            }}
+          />
+        ))}
+      </div>
+      <span className="globe-tag tag-strategy">Strategy</span>
+      <span className="globe-tag tag-design">Design</span>
+      <span className="globe-tag tag-cloud">Cloud</span>
+    </div>
+  );
 }
 
 function WordReveal({ as: Tag = 'span', children, className = '' }) {
@@ -246,19 +294,7 @@ function App() {
             </div>
           </div>
           <div className="hero-stage reveal" aria-label="Animated Code Amigo delivery system">
-            <div className="flow-visual">
-              <div className="flow-line line-one" />
-              <div className="flow-line line-two" />
-              <div className="flow-card primary-flow">
-                <span>Code Amigo</span>
-                <strong>Idea to Launch</strong>
-                <p>Strategy, design, engineering, quality, cloud, and support moving as one delivery system.</p>
-              </div>
-              <div className="flow-node node-a"><span>01</span><strong>Discover</strong></div>
-              <div className="flow-node node-b"><span>03</span><strong>Design</strong></div>
-              <div className="flow-node node-c"><span>05</span><strong>QA</strong></div>
-              <div className="flow-node node-d"><span>07</span><strong>Evolve</strong></div>
-            </div>
+            <DepthGlobe />
           </div>
         </section>
 
