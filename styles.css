@@ -807,7 +807,7 @@ h3 {
   left: 50%;
   bottom: 11%;
   transform: translateX(-50%);
-  animation-delay: -3.2s;
+  animation: tagCloudFloat 5.8s var(--ease) -3.2s infinite alternate;
 }
 
 @keyframes globeSpin {
@@ -831,6 +831,10 @@ h3 {
 
 @keyframes tagFloat {
   to { translate: 0 -7px; }
+}
+
+@keyframes tagCloudFloat {
+  to { transform: translateX(-50%) translateY(-7px); }
 }
 
 .service-card,
