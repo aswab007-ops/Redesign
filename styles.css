@@ -756,30 +756,62 @@ h3 {
 
 .globe-tag {
   position: absolute;
-  min-height: 38px;
-  display: inline-grid;
-  place-items: center;
-  padding: 0 14px;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px 0 13px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--surface);
-  backdrop-filter: blur(14px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 54%),
+    rgba(24, 24, 24, 0.72);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
   color: var(--ink);
   font-size: 0.82rem;
-  font-weight: 850;
-  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.18);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 14px 42px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
   animation: tagFloat 5.8s var(--ease) infinite alternate;
+  overflow: hidden;
   transition: transform 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease), color 220ms var(--ease), box-shadow 220ms var(--ease);
+}
+
+.globe-tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 0 16px color-mix(in srgb, var(--primary), transparent 30%);
+}
+
+.globe-tag::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-110%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transition: transform 520ms var(--ease);
 }
 
 .globe-tag:hover {
   transform: translateY(-3px) scale(1.04);
   border-color: color-mix(in srgb, var(--primary), white 24%);
-  background: var(--primary);
+  background:
+    radial-gradient(circle at 30% 0, rgba(255, 255, 255, 0.18), transparent 44%),
+    var(--primary);
   color: #fff;
   box-shadow:
     0 16px 44px color-mix(in srgb, var(--primary), transparent 62%),
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.globe-tag:hover::after {
+  transform: translateX(110%);
 }
 
 .depth-globe:has(.globe-tag:hover) .globe-shell,
@@ -808,6 +840,10 @@ h3 {
   bottom: 11%;
   transform: translateX(-50%);
   animation: tagCloudFloat 5.8s var(--ease) -3.2s infinite alternate;
+}
+
+.tag-cloud:hover {
+  transform: translateX(-50%) translateY(-3px) scale(1.04);
 }
 
 @keyframes globeSpin {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import DotField from './components/DotField';
 import '../styles.css';
@@ -173,6 +173,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState('home');
   const [note, setNote] = useState('');
+  const activeRef = useRef('home');
   const isDark = theme === 'dark';
 
   useEffect(() => {
@@ -189,23 +190,38 @@ function App() {
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach((element) => reveal.observe(element));
+    const trackedSections = ['services', 'work', 'blog', 'careers']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
 
+    let moveFrame = 0;
+    let scrollFrame = 0;
     const onMove = (event) => {
-      document.body.style.setProperty('--mx', `${event.clientX}px`);
-      document.body.style.setProperty('--my', `${event.clientY}px`);
+      const x = event.clientX;
+      const y = event.clientY;
+      cancelAnimationFrame(moveFrame);
+      moveFrame = requestAnimationFrame(() => {
+        document.body.style.setProperty('--mx', `${x}px`);
+        document.body.style.setProperty('--my', `${y}px`);
+      });
     };
     const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const y = window.scrollY;
-      document.body.style.setProperty('--scroll', max > 0 ? y / max : 0);
-      document.body.classList.toggle('nav-scrolled', y > 48);
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY;
+        document.body.style.setProperty('--scroll', max > 0 ? y / max : 0);
+        document.body.classList.toggle('nav-scrolled', y > 48);
 
-      const ids = ['services', 'work', 'blog', 'careers'];
-      const current = ids.reduce((match, id) => {
-        const section = document.getElementById(id);
-        return section && section.offsetTop - 180 <= y ? id : match;
-      }, 'home');
-      setActiveId(current);
+        const current = trackedSections.reduce((match, section) => {
+          return section.offsetTop - 180 <= y ? section.id : match;
+        }, 'home');
+        if (current !== activeRef.current) {
+          activeRef.current = current;
+          setActiveId(current);
+        }
+      });
     };
 
     window.addEventListener('pointermove', onMove, { passive: true });
@@ -214,6 +230,8 @@ function App() {
 
     return () => {
       reveal.disconnect();
+      cancelAnimationFrame(moveFrame);
+      cancelAnimationFrame(scrollFrame);
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('scroll', onScroll);
     };
