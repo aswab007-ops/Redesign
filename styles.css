@@ -402,7 +402,6 @@ h3 {
   cursor: default;
 }
 
-.liquid-heading::before,
 .liquid-heading::after {
   content: "";
   position: absolute;
@@ -411,19 +410,6 @@ h3 {
   transition: opacity 180ms var(--ease);
   -webkit-mask-image: radial-gradient(circle 58px at var(--lx) var(--ly), #000 0 42%, rgba(0, 0, 0, 0.72) 58%, transparent 100%);
   mask-image: radial-gradient(circle 58px at var(--lx) var(--ly), #000 0 42%, rgba(0, 0, 0, 0.72) 58%, transparent 100%);
-}
-
-.liquid-heading::before {
-  inset: -0.08em -0.1em;
-  z-index: -1;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at var(--lx) var(--ly), rgba(255, 255, 255, 0.34), transparent 34%),
-    radial-gradient(circle at calc(var(--lx) + 24px) calc(var(--ly) - 18px), var(--glow), transparent 44%),
-    rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px) saturate(1.8) contrast(1.08);
-  -webkit-backdrop-filter: blur(16px) saturate(1.8) contrast(1.08);
-  filter: drop-shadow(0 0 22px var(--glow));
 }
 
 .liquid-heading::after {
