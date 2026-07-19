@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Analytics } from '@vercel/analytics/react';
 import DotField from './components/DotField';
 import '../styles.css';
 
@@ -442,6 +443,7 @@ function App() {
         <span>Subscribe to our newsletter for the latest insights.</span>
         <span>(c) 2026 Code Amigo. All rights reserved.</span>
       </footer>
+      <Analytics />
     </>
   );
 }
