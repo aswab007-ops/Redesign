@@ -639,18 +639,32 @@ h3 {
   place-items: center;
   transform-style: preserve-3d;
   animation: globeFloat 7s var(--ease) infinite alternate;
+  transition: transform 420ms var(--ease), filter 420ms var(--ease);
+}
+
+.depth-globe:hover {
+  transform: translateY(-8px) scale(1.035) rotateX(2deg);
+  filter: saturate(1.18) brightness(1.1);
 }
 
 .globe-halo {
   position: absolute;
-  width: 74%;
+  width: 86%;
   aspect-ratio: 1;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 36% 28%, color-mix(in srgb, var(--primary), white 18%), transparent 14%),
-    radial-gradient(circle, color-mix(in srgb, var(--primary), transparent 72%), transparent 66%);
-  filter: blur(24px);
-  opacity: 0.62;
+    radial-gradient(circle at 36% 28%, color-mix(in srgb, var(--primary), white 30%), transparent 16%),
+    radial-gradient(circle at 64% 58%, color-mix(in srgb, var(--accent), white 18%), transparent 28%),
+    radial-gradient(circle, color-mix(in srgb, var(--primary), transparent 54%), transparent 68%);
+  filter: blur(20px);
+  opacity: 0.9;
+  transition: opacity 360ms var(--ease), filter 360ms var(--ease), transform 360ms var(--ease);
+}
+
+.depth-globe:hover .globe-halo {
+  opacity: 1;
+  filter: blur(16px);
+  transform: scale(1.04);
 }
 
 .globe-shell {
@@ -667,15 +681,25 @@ h3 {
   inset: 9%;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.22), transparent 20%),
-    radial-gradient(circle at 64% 70%, color-mix(in srgb, var(--accent), transparent 62%), transparent 36%),
-    linear-gradient(145deg, color-mix(in srgb, var(--primary), transparent 80%), rgba(255, 255, 255, 0.025));
-  border: 1px solid color-mix(in srgb, var(--accent), transparent 72%);
+    radial-gradient(circle at 35% 22%, rgba(255, 255, 255, 0.34), transparent 18%),
+    radial-gradient(circle at 68% 72%, color-mix(in srgb, var(--accent), transparent 48%), transparent 38%),
+    radial-gradient(circle at 26% 66%, color-mix(in srgb, var(--primary), transparent 50%), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--primary), transparent 64%), rgba(255, 255, 255, 0.06));
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 52%);
   box-shadow:
-    inset 0 1px 28px rgba(255, 255, 255, 0.08),
-    inset -28px -28px 60px rgba(0, 0, 0, 0.24),
-    0 20px 80px color-mix(in srgb, var(--primary), transparent 84%);
+    inset 0 1px 36px rgba(255, 255, 255, 0.14),
+    inset -28px -28px 64px rgba(0, 0, 0, 0.26),
+    0 22px 92px color-mix(in srgb, var(--primary), transparent 72%);
   transform: translateZ(-26px);
+  transition: box-shadow 360ms var(--ease), border-color 360ms var(--ease);
+}
+
+.depth-globe:hover .globe-core {
+  border-color: color-mix(in srgb, var(--primary), white 18%);
+  box-shadow:
+    inset 0 1px 42px rgba(255, 255, 255, 0.18),
+    inset -24px -24px 60px rgba(0, 0, 0, 0.22),
+    0 26px 110px color-mix(in srgb, var(--primary), transparent 60%);
 }
 
 .globe-point {
@@ -685,9 +709,11 @@ h3 {
   width: var(--gs);
   height: var(--gs);
   border-radius: 999px;
-  background: linear-gradient(135deg, #fff, var(--primary) 46%, var(--accent));
-  opacity: var(--go);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--primary), transparent 38%);
+  background: linear-gradient(135deg, #fff, color-mix(in srgb, var(--primary), white 14%) 46%, var(--accent));
+  opacity: calc(var(--go) + 0.18);
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--primary), transparent 24%),
+    0 0 22px color-mix(in srgb, var(--accent), transparent 70%);
   transform: translate3d(var(--gx), var(--gy), var(--gz));
   animation: pointPulse 3.6s var(--ease) infinite alternate;
   animation-delay: var(--gd);
@@ -698,9 +724,17 @@ h3 {
   position: absolute;
   width: 82%;
   aspect-ratio: 1;
-  border: 1px solid color-mix(in srgb, var(--accent), transparent 70%);
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 52%);
   border-radius: 999px;
-  opacity: 0.58;
+  opacity: 0.78;
+  box-shadow: 0 0 28px color-mix(in srgb, var(--primary), transparent 82%);
+  transition: border-color 300ms var(--ease), opacity 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+
+.depth-globe:hover .globe-orbit {
+  border-color: color-mix(in srgb, var(--primary), white 12%);
+  opacity: 0.92;
+  box-shadow: 0 0 38px color-mix(in srgb, var(--primary), transparent 70%);
 }
 
 .orbit-one {
@@ -735,6 +769,27 @@ h3 {
   font-weight: 850;
   box-shadow: 0 14px 42px rgba(0, 0, 0, 0.18);
   animation: tagFloat 5.8s var(--ease) infinite alternate;
+  transition: transform 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease), color 220ms var(--ease), box-shadow 220ms var(--ease);
+}
+
+.globe-tag:hover {
+  transform: translateY(-3px) scale(1.04);
+  border-color: color-mix(in srgb, var(--primary), white 24%);
+  background: var(--primary);
+  color: #fff;
+  box-shadow:
+    0 16px 44px color-mix(in srgb, var(--primary), transparent 62%),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.depth-globe:has(.globe-tag:hover) .globe-shell,
+.depth-globe:hover .globe-shell {
+  animation-duration: 12s;
+}
+
+.depth-globe:hover .globe-point {
+  opacity: 1;
+  filter: brightness(1.25);
 }
 
 .tag-strategy {
