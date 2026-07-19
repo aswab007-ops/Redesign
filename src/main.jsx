@@ -73,11 +73,33 @@ function smoothScroll(id) {
   requestAnimationFrame(step);
 }
 
+function moveLiquidLens(event) {
+  const target = event.currentTarget;
+  const rect = target.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  cancelAnimationFrame(target._liquidFrame);
+  target._liquidFrame = requestAnimationFrame(() => {
+    target.style.setProperty('--lx', `${x}px`);
+    target.style.setProperty('--ly', `${y}px`);
+    target.style.setProperty('--glass-alpha', '1');
+  });
+}
+
 function WordReveal({ as: Tag = 'span', children, className = '' }) {
   const words = String(children).split(/\s+/);
+  const isHeading = Tag === 'h1' || Tag === 'h2';
 
   return (
-    <Tag className={className} aria-label={String(children)}>
+    <Tag
+      className={`${isHeading ? 'liquid-heading' : ''} ${className}`.trim()}
+      aria-label={String(children)}
+      data-text={isHeading ? String(children) : undefined}
+      onPointerMove={isHeading ? moveLiquidLens : undefined}
+      onPointerEnter={isHeading ? moveLiquidLens : undefined}
+      onPointerLeave={isHeading ? (event) => event.currentTarget.style.setProperty('--glass-alpha', '0') : undefined}
+    >
       {words.map((word, i) => (
         <React.Fragment key={`${word}-${i}`}>
           <span className="word" style={{ '--i': i }} aria-hidden="true">{word}</span>

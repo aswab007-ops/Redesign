@@ -392,6 +392,61 @@ h3 {
   text-wrap: balance;
 }
 
+.liquid-heading {
+  --lx: 50%;
+  --ly: 50%;
+  --glass-alpha: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  cursor: default;
+}
+
+.liquid-heading::before,
+.liquid-heading::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: var(--glass-alpha);
+  transition: opacity 180ms var(--ease);
+  -webkit-mask-image: radial-gradient(circle 58px at var(--lx) var(--ly), #000 0 42%, rgba(0, 0, 0, 0.72) 58%, transparent 100%);
+  mask-image: radial-gradient(circle 58px at var(--lx) var(--ly), #000 0 42%, rgba(0, 0, 0, 0.72) 58%, transparent 100%);
+}
+
+.liquid-heading::before {
+  inset: -0.08em -0.1em;
+  z-index: -1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at var(--lx) var(--ly), rgba(255, 255, 255, 0.34), transparent 34%),
+    radial-gradient(circle at calc(var(--lx) + 24px) calc(var(--ly) - 18px), var(--glow), transparent 44%),
+    rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(1.8) contrast(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8) contrast(1.08);
+  filter: drop-shadow(0 0 22px var(--glow));
+}
+
+.liquid-heading::after {
+  content: attr(data-text);
+  inset: 0;
+  z-index: 2;
+  color: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-wrap: inherit;
+  white-space: pre-wrap;
+  background:
+    radial-gradient(circle at var(--lx) var(--ly), #fff 0 18%, color-mix(in srgb, var(--accent), white 44%) 34%, color-mix(in srgb, var(--primary), white 24%) 54%, rgba(255, 255, 255, 0.72) 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    1px 0 color-mix(in srgb, var(--primary), transparent 52%),
+    -1px 0 color-mix(in srgb, var(--accent), transparent 54%),
+    0 0 18px rgba(255, 255, 255, 0.18);
+  filter: saturate(1.35);
+}
+
 h1 {
   max-width: 11ch;
   font-size: clamp(3.8rem, 8.4vw, 6.75rem);
