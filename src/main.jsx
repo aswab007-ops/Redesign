@@ -123,6 +123,7 @@ function SectionTitle({ eyebrow, title, children }) {
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeId, setActiveId] = useState('home');
   const [note, setNote] = useState('');
   const isDark = theme === 'dark';
 
@@ -148,11 +149,15 @@ function App() {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const y = window.scrollY;
-      const last = Number(document.body.dataset.lastScroll || 0);
       document.body.style.setProperty('--scroll', max > 0 ? y / max : 0);
-      if (y > 120 && y > last + 6) document.body.classList.add('nav-hidden');
-      if (y < last - 4 || y < 48) document.body.classList.remove('nav-hidden');
-      document.body.dataset.lastScroll = String(y);
+      document.body.classList.toggle('nav-scrolled', y > 48);
+
+      const ids = ['services', 'work', 'blog', 'careers'];
+      const current = ids.reduce((match, id) => {
+        const section = document.getElementById(id);
+        return section && section.offsetTop - 180 <= y ? id : match;
+      }, 'home');
+      setActiveId(current);
     };
 
     window.addEventListener('pointermove', onMove, { passive: true });
@@ -198,13 +203,29 @@ function App() {
         <DotField {...dotProps} />
       </div>
 
-      <header className={`nav-shell ${menuOpen ? 'open' : ''}`}>
+      <header
+        className={`nav-shell ${menuOpen ? 'open' : ''}`}
+        onPointerMove={(event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          event.currentTarget.style.setProperty('--nav-x', `${event.clientX - rect.left}px`);
+          event.currentTarget.style.setProperty('--nav-y', `${event.clientY - rect.top}px`);
+        }}
+      >
         <button className="brand-mark plain-button" type="button" onClick={() => smoothScroll('#home')} aria-label="Code Amigo home">
           <span className="brand-glyph">CA</span>
           <span>Code Amigo</span>
         </button>
         <nav className="nav-links" aria-label="Primary navigation">
-          {nav.map(([id, label]) => <button key={id} type="button" onClick={() => { setMenuOpen(false); smoothScroll(`#${id}`); }}>{label}</button>)}
+          {nav.map(([id, label]) => (
+            <button
+              className={activeId === id ? 'active' : ''}
+              key={id}
+              type="button"
+              onClick={() => { setMenuOpen(false); smoothScroll(`#${id}`); }}
+            >
+              {label}
+            </button>
+          ))}
         </nav>
         <button className="theme-toggle" type="button" aria-label={isDark ? 'Switch theme' : 'Switch theme'} aria-pressed={isDark} onClick={() => setTheme(isDark ? 'crimson' : 'dark')}>
           <span className="sun" /><span className="moon" />
